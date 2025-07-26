@@ -1021,28 +1021,28 @@ require('lazy').setup({
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 -- Vertical scroll and center
-vim.keymap.set('n', '<C-d>', '<C-d>zz', opts)
-vim.keymap.set('n', '<C-u>', '<C-u>zz', opts)
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
 
 -- Window Tabs
-vim.keymap.set('n', '<leader>to', ':tabnew<CR>', opts)   -- open new tab
-vim.keymap.set('n', '<leader>tx', ':tabclose<CR>', opts) -- close current tab
-vim.keymap.set('n', '<leader>tn', ':tabn<CR>', opts)     --  go to next tab
-vim.keymap.set('n', '<leader>tp', ':tabp<CR>', opts)     --  go to previous tab
+vim.keymap.set('n', '<leader>to', ':tabnew<CR>')   -- open new tab
+vim.keymap.set('n', '<leader>tx', ':tabclose<CR>') -- close current tab
+vim.keymap.set('n', '<leader>tn', ':tabn<CR>')     --  go to next tab
+vim.keymap.set('n', '<leader>tp', ':tabp<CR>')     --  go to previous tab
 
 -- Tabs to 4 spaces --
-vim.opt.autoindent = true
-vim.opt.expandtab = true
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
+vim.o.autoindent = true
+vim.o.expandtab = true
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
 
 -- Find and center
 -- vim.keymap.set('n', 'n', 'nzzzv')
 -- vim.keymap.set('n', 'N', 'Nzzzv')
 
 -- delete single character without copying into register
-vim.keymap.set('n', 'x', '"_x', opts)
+vim.keymap.set('n', 'x', '"_x')
 
 -- Move text up and down
-vim.keymap.set('v', '<A-j>', ':m .+1<CR>==', opts)
-vim.keymap.set('v', '<A-k>', ':m .-2<CR>==', opts)
+vim.keymap.set('v', '<A-j>', ':m .+1<CR>==')
+vim.keymap.set('v', '<A-k>', ':m .-2<CR>==')
