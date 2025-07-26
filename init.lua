@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -102,10 +102,11 @@ vim.g.have_nerd_font = false
 vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.o.relativenumber = true
+vim.o.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
-vim.o.mouse = 'a'
+-- vim.o.mouse = 'a'
+vim.o.mouse = ''
 
 -- Don't show the mode, since it's already in the status line
 vim.o.showmode = false
@@ -122,7 +123,7 @@ end)
 vim.o.breakindent = true
 
 -- Save undo history
-vim.o.undofile = true
+-- vim.o.undofile = true
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.o.ignorecase = true
@@ -164,7 +165,7 @@ vim.o.scrolloff = 10
 -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
 -- instead raise a dialog asking if you wish to save the current file(s)
 -- See `:help 'confirm'`
-vim.o.confirm = true
+-- vim.o.confirm = true
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -304,7 +305,7 @@ require('lazy').setup({
     opts = {
       -- delay between pressing a key and opening which-key (milliseconds)
       -- this setting is independent of vim.o.timeoutlen
-      delay = 0,
+      delay = 2600,
       icons = {
         -- set icon mappings to true if you have a Nerd Font
         mappings = vim.g.have_nerd_font,
@@ -777,104 +778,104 @@ require('lazy').setup({
     },
   },
 
-  { -- Autocompletion
-    'saghen/blink.cmp',
-    event = 'VimEnter',
-    version = '1.*',
-    dependencies = {
-      -- Snippet Engine
-      {
-        'L3MON4D3/LuaSnip',
-        version = '2.*',
-        build = (function()
-          -- Build Step is needed for regex support in snippets.
-          -- This step is not supported in many windows environments.
-          -- Remove the below condition to re-enable on windows.
-          if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
-            return
-          end
-          return 'make install_jsregexp'
-        end)(),
-        dependencies = {
-          -- `friendly-snippets` contains a variety of premade snippets.
-          --    See the README about individual language/framework/plugin snippets:
-          --    https://github.com/rafamadriz/friendly-snippets
-          -- {
-          --   'rafamadriz/friendly-snippets',
-          --   config = function()
-          --     require('luasnip.loaders.from_vscode').lazy_load()
-          --   end,
-          -- },
-        },
-        opts = {},
-      },
-      'folke/lazydev.nvim',
-    },
-    --- @module 'blink.cmp'
-    --- @type blink.cmp.Config
-    opts = {
-      keymap = {
-        -- 'default' (recommended) for mappings similar to built-in completions
-        --   <c-y> to accept ([y]es) the completion.
-        --    This will auto-import if your LSP supports it.
-        --    This will expand snippets if the LSP sent a snippet.
-        -- 'super-tab' for tab to accept
-        -- 'enter' for enter to accept
-        -- 'none' for no mappings
-        --
-        -- For an understanding of why the 'default' preset is recommended,
-        -- you will need to read `:help ins-completion`
-        --
-        -- No, but seriously. Please read `:help ins-completion`, it is really good!
-        --
-        -- All presets have the following mappings:
-        -- <tab>/<s-tab>: move to right/left of your snippet expansion
-        -- <c-space>: Open menu or open docs if already open
-        -- <c-n>/<c-p> or <up>/<down>: Select next/previous item
-        -- <c-e>: Hide menu
-        -- <c-k>: Toggle signature help
-        --
-        -- See :h blink-cmp-config-keymap for defining your own keymap
-        preset = 'default',
-
-        -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-        --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
-      },
-
-      appearance = {
-        -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-        -- Adjusts spacing to ensure icons are aligned
-        nerd_font_variant = 'mono',
-      },
-
-      completion = {
-        -- By default, you may press `<c-space>` to show the documentation.
-        -- Optionally, set `auto_show = true` to show the documentation after a delay.
-        documentation = { auto_show = false, auto_show_delay_ms = 500 },
-      },
-
-      sources = {
-        default = { 'lsp', 'path', 'snippets', 'lazydev' },
-        providers = {
-          lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
-        },
-      },
-
-      snippets = { preset = 'luasnip' },
-
-      -- Blink.cmp includes an optional, recommended rust fuzzy matcher,
-      -- which automatically downloads a prebuilt binary when enabled.
-      --
-      -- By default, we use the Lua implementation instead, but you may enable
-      -- the rust implementation via `'prefer_rust_with_warning'`
-      --
-      -- See :h blink-cmp-config-fuzzy for more information
-      fuzzy = { implementation = 'lua' },
-
-      -- Shows a signature help window while you type arguments for a function
-      signature = { enabled = true },
-    },
-  },
+--   { -- Autocompletion
+--     'saghen/blink.cmp',
+--     event = 'VimEnter',
+--     version = '1.*',
+--     dependencies = {
+--       -- Snippet Engine
+--       {
+--         'L3MON4D3/LuaSnip',
+--         version = '2.*',
+--         build = (function()
+--           -- Build Step is needed for regex support in snippets.
+--           -- This step is not supported in many windows environments.
+--           -- Remove the below condition to re-enable on windows.
+--           if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
+--             return
+--           end
+--           return 'make install_jsregexp'
+--         end)(),
+--         dependencies = {
+--           -- `friendly-snippets` contains a variety of premade snippets.
+--           --    See the README about individual language/framework/plugin snippets:
+--           --    https://github.com/rafamadriz/friendly-snippets
+--           -- {
+--           --   'rafamadriz/friendly-snippets',
+--           --   config = function()
+--           --     require('luasnip.loaders.from_vscode').lazy_load()
+--           --   end,
+--           -- },
+--         },
+--         opts = {},
+--       },
+--       'folke/lazydev.nvim',
+--     },
+--     --- @module 'blink.cmp'
+--     --- @type blink.cmp.Config
+--     opts = {
+--       keymap = {
+--         -- 'default' (recommended) for mappings similar to built-in completions
+--         --   <c-y> to accept ([y]es) the completion.
+--         --    This will auto-import if your LSP supports it.
+--         --    This will expand snippets if the LSP sent a snippet.
+--         -- 'super-tab' for tab to accept
+--         -- 'enter' for enter to accept
+--         -- 'none' for no mappings
+--         --
+--         -- For an understanding of why the 'default' preset is recommended,
+--         -- you will need to read `:help ins-completion`
+--         --
+--         -- No, but seriously. Please read `:help ins-completion`, it is really good!
+--         --
+--         -- All presets have the following mappings:
+--         -- <tab>/<s-tab>: move to right/left of your snippet expansion
+--         -- <c-space>: Open menu or open docs if already open
+--         -- <c-n>/<c-p> or <up>/<down>: Select next/previous item
+--         -- <c-e>: Hide menu
+--         -- <c-k>: Toggle signature help
+--         --
+--         -- See :h blink-cmp-config-keymap for defining your own keymap
+--         preset = 'default',
+--
+--         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
+--         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
+--       },
+--
+--       appearance = {
+--         -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+--         -- Adjusts spacing to ensure icons are aligned
+--         nerd_font_variant = 'mono',
+--       },
+--
+--       completion = {
+--         -- By default, you may press `<c-space>` to show the documentation.
+--         -- Optionally, set `auto_show = true` to show the documentation after a delay.
+--         documentation = { auto_show = false, auto_show_delay_ms = 500 },
+--       },
+--
+--       sources = {
+--         default = { 'lsp', 'path', 'snippets', 'lazydev' },
+--         providers = {
+--           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+--         },
+--       },
+--
+--       snippets = { preset = 'luasnip' },
+--
+--       -- Blink.cmp includes an optional, recommended rust fuzzy matcher,
+--       -- which automatically downloads a prebuilt binary when enabled.
+--       --
+--       -- By default, we use the Lua implementation instead, but you may enable
+--       -- the rust implementation via `'prefer_rust_with_warning'`
+--       --
+--       -- See :h blink-cmp-config-fuzzy for more information
+--       fuzzy = { implementation = 'lua' },
+--
+--       -- Shows a signature help window while you type arguments for a function
+--       signature = { enabled = true },
+--     },
+--   },
 
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
@@ -889,6 +890,11 @@ require('lazy').setup({
         styles = {
           comments = { italic = false }, -- Disable italics in comments
         },
+        -- Customize background color
+        on_colors = function(colors)
+          colors.bg = '#0D0E10'
+          colors.bg_highlight = '#16161e'
+        end,
       }
 
       -- Load the colorscheme here.
@@ -1014,3 +1020,29 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+-- Vertical scroll and center
+vim.keymap.set('n', '<C-d>', '<C-d>zz', opts)
+vim.keymap.set('n', '<C-u>', '<C-u>zz', opts)
+
+-- Window Tabs
+vim.keymap.set('n', '<leader>to', ':tabnew<CR>', opts)   -- open new tab
+vim.keymap.set('n', '<leader>tx', ':tabclose<CR>', opts) -- close current tab
+vim.keymap.set('n', '<leader>tn', ':tabn<CR>', opts)     --  go to next tab
+vim.keymap.set('n', '<leader>tp', ':tabp<CR>', opts)     --  go to previous tab
+
+-- Tabs to 4 spaces --
+vim.opt.autoindent = true
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+
+-- Find and center
+-- vim.keymap.set('n', 'n', 'nzzzv')
+-- vim.keymap.set('n', 'N', 'Nzzzv')
+
+-- delete single character without copying into register
+vim.keymap.set('n', 'x', '"_x', opts)
+
+-- Move text up and down
+vim.keymap.set('v', '<A-j>', ':m .+1<CR>==', opts)
+vim.keymap.set('v', '<A-k>', ':m .-2<CR>==', opts)
