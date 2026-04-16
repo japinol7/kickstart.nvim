@@ -984,10 +984,10 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 
 -- Window Tabs
-vim.keymap.set('n', '<leader>to', ':tabnew<CR>')   -- open new tab
+vim.keymap.set('n', '<leader>to', ':tabnew<CR>') -- open new tab
 vim.keymap.set('n', '<leader>tx', ':tabclose<CR>') -- close current tab
-vim.keymap.set('n', '<leader>tn', ':tabn<CR>')     --  go to next tab
-vim.keymap.set('n', '<leader>tp', ':tabp<CR>')     --  go to previous tab
+vim.keymap.set('n', '<leader>tn', ':tabn<CR>') --  go to next tab
+vim.keymap.set('n', '<leader>tp', ':tabp<CR>') --  go to previous tab
 
 -- Tabs to 4 spaces --
 vim.o.autoindent = true
@@ -1005,3 +1005,23 @@ vim.keymap.set('n', 'x', '"_x')
 -- Move text up and down
 vim.keymap.set('v', '<A-j>', ':m .+1<CR>==')
 vim.keymap.set('v', '<A-k>', ':m .-2<CR>==')
+
+-- Join lines without moving cursor position
+vim.keymap.set('n', 'J', 'mzJ`z')
+
+-- Faster jump to start/end of line
+vim.keymap.set('n', 'H', '^')
+vim.keymap.set('n', 'L', '$')
+
+-- Indent in visual mode and keep selection active
+vim.keymap.set('n', '<', '<gv')
+vim.keymap.set('n', '>', '>gv')
+
+-- Yank over selection without overwriting yank register
+vim.keymap.set('x', 'p', '"_dP', { desc = 'Paste without overwriting yank' })
+
+-- Maintain original yanking with leader key
+vim.keymap.set('x', '<leader>p', 'p', { desc = 'Default paste (replace + yank)' })
+
+-- Make U redo (easier than Ctrl+r)
+vim.keymap.set('n', 'U', '<C-r>')
