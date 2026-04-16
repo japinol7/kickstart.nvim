@@ -311,7 +311,7 @@ require('lazy').setup({
     ---@diagnostic disable-next-line: missing-fields
     opts = {
       -- delay between pressing a key and opening which-key (milliseconds)
-      delay = 0,
+      delay = 2600,
       icons = { mappings = vim.g.have_nerd_font },
 
       -- Document existing key chains
@@ -813,8 +813,15 @@ require('lazy').setup({
         },
         -- Customize background color
         on_colors = function(colors)
-          colors.bg = '#0D0E10'
-          colors.bg_highlight = '#16161e'
+          colors.bg = '#040405'
+          colors.bg_highlight = '#0A0A0C'
+        end,
+
+        -- Customize highlight visual mode color
+        on_highlights = function(hl)
+          hl.Visual = {
+            bg = '#011368',
+          }
         end,
       }
 
