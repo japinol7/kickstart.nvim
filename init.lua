@@ -99,7 +99,7 @@ do
   vim.g.maplocalleader = ' '
 
   -- Set to true if you have a Nerd Font installed and selected in the terminal
-  vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
   -- [[ Setting options ]]
   --  See `:help vim.o`
@@ -110,7 +110,7 @@ do
   vim.o.number = true
   -- You can also add relative line numbers, to help with jumping.
   --  Experiment for yourself to see if you like it!
-  -- vim.o.relativenumber = true
+vim.o.relativenumber = true
 
   -- Enable mouse mode, can be useful for resizing splits for example!
   vim.o.mouse = 'a'
@@ -128,7 +128,7 @@ do
   vim.o.breakindent = true
 
   -- Enable undo/redo changes even after closing and reopening a file
-  vim.o.undofile = true
+-- vim.o.undofile = true
 
   -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
   vim.o.ignorecase = true
@@ -170,7 +170,7 @@ do
   -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
   -- instead raise a dialog asking if you wish to save the current file(s)
   -- See `:help 'confirm'`
-  vim.o.confirm = true
+  --  vim.o.confirm = true
 end
 
 -- ============================================================
@@ -406,7 +406,7 @@ do
   vim.pack.add { gh 'folke/which-key.nvim' }
   require('which-key').setup {
     -- Delay between pressing a key and opening which-key (milliseconds)
-    delay = 0,
+    delay = 2600,
     icons = { mappings = vim.g.have_nerd_font },
     -- Document existing key chains
     spec = {
@@ -425,11 +425,23 @@ do
   -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
   vim.pack.add { gh 'folke/tokyonight.nvim' }
   ---@diagnostic disable-next-line: missing-fields
-  require('tokyonight').setup {
-    styles = {
-      comments = { italic = false }, -- Disable italics in comments
-    },
-  }
+      require('tokyonight').setup {
+        styles = {
+          comments = { italic = false }, -- Disable italics in comments
+        },
+        -- Customize background color
+        on_colors = function(colors)
+          colors.bg = '#020203'
+          colors.bg_highlight = '#0A0A0C'
+        end,
+
+        -- Customize highlight visual mode color
+        on_highlights = function(hl)
+          hl.Visual = {
+            bg = '#011368',
+          }
+        end,
+      }
 
   -- Load the colorscheme here.
   -- Like many other themes, this one has different styles, and you could load
@@ -1037,3 +1049,57 @@ end
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+-- Vertical scroll and center
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
+
+-- Window Tabs
+vim.keymap.set('n', '<leader>to', ':tabnew<CR>') -- open new tab
+vim.keymap.set('n', '<leader>tx', ':tabclose<CR>') -- close current tab
+vim.keymap.set('n', '<leader>tn', ':tabn<CR>') --  go to next tab
+vim.keymap.set('n', '<leader>tp', ':tabp<CR>') --  go to previous tab
+
+-- Tabs to 4 spaces --
+vim.o.autoindent = true
+vim.o.expandtab = true
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+
+-- Find and center
+-- vim.keymap.set('n', 'n', 'nzzzv')
+-- vim.keymap.set('n', 'N', 'Nzzzv')
+
+-- delete single character without copying into register
+vim.keymap.set('n', 'x', '"_x')
+
+-- Move text up and down
+vim.keymap.set('v', '<A-j>', ':m .+1<CR>==')
+vim.keymap.set('v', '<A-k>', ':m .-2<CR>==')
+
+-- Join lines without moving cursor position
+vim.keymap.set('n', 'J', 'mzJ`z')
+
+-- Faster jump to start/end of line
+vim.keymap.set('n', 'H', '^')
+vim.keymap.set('n', 'L', '$')
+
+-- Matching delimiter - Spanish keyboard friendly
+for _, mode in ipairs({ 'n', 'x', 'o' }) do
+  vim.keymap.set(mode, 'gm', '%', { desc = 'Jump to matching delimiter' })
+end
+
+-- Indent in visual mode and keep selection active
+vim.keymap.set('n', '<', '<gv')
+vim.keymap.set('n', '>', '>gv')
+
+-- Yank over selection without overwriting yank register
+vim.keymap.set('x', 'p', '"_dP', { desc = 'Paste without overwriting yank' })
+
+-- Maintain original yanking with leader key
+vim.keymap.set('x', '<leader>p', 'p', { desc = 'Default paste (replace + yank)' })
+
+-- Make U redo (easier than Ctrl+r)
+vim.keymap.set('n', 'U', '<C-r>')
+
+-- Set C-Space to C-N
+vim.keymap.set({ 'n', 'i', 'v', 'x' }, '<C-Space>', '<C-n>')
