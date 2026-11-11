@@ -366,7 +366,8 @@ do
       colors.border = '#28364F'
       colors.blue = '#5BADEC'
       colors.blue1 = '#4E7CFC'
-      colors.cyan = '#33D7B4'
+      colors.cyan = '#40C2D9'
+      colors.teal = "#33D7B4"
       colors.green = '#83CD71'
       colors.orange = '#F6760A'
       colors.magenta = '#CA72FC'
@@ -390,11 +391,12 @@ do
         purple = '#CA72FC',
         teal = '#33D7B4',
         blue = '#5BADEC',
+        blue_2 = '#2AA2E8',
         blue_purple = '#7676F8',
         magenta = '#CA72FC',
         magenta_cool = '#F81266',
         pink = '#EA0077',
-        type = "#9C9CE3",
+        type = "#08B8DB",
         selection = '#000F59',
         border = '#28364F',
         red = '#F77669',
@@ -467,16 +469,16 @@ do
       local ts = {
         ['@comment'] = { fg = c.comment },
         ['@string'] = { fg = c.green },
-        ['@string.documentation'] = { fg = c.comment },
+        ['@string.documentation'] = { fg = c.green },
         ['@character'] = { fg = c.green },
         ['@number'] = { fg = c.blue },
         ['@boolean'] = { fg = c.purple },
         ['@constant'] = { fg = c.purple },
         ['@constant.builtin'] = { fg = c.blue_purple },
         ['@function'] = { fg = c.yellow },
-        ['@function.call'] = { fg = c.yellow },
+        ['@function.call'] = { fg = c.blue_2 },
         ['@function.method'] = { fg = c.yellow },
-        ['@function.method.call'] = { fg = c.yellow },
+        ['@function.method.call'] = { fg = c.blue_2 },
         ['@function.builtin'] = { fg = c.blue_purple },
         ['@method'] = { fg = c.yellow },
         ['@keyword'] = { fg = c.orange },
@@ -500,7 +502,7 @@ do
         ['@variable.parameter'] = { fg = c.teal },
         ['@parameter'] = { fg = c.teal },
         ['@namespace'] = { fg = c.blue_purple },
-        ['@module'] = { fg = c.blue_purple },
+        ['@module'] = { fg = c.fg },
         ['@label'] = { fg = c.pink },
         ['@punctuation'] = { fg = c.muted },
         ['@markup.heading'] = { fg = c.yellow, bold = true },
