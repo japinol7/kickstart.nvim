@@ -1,89 +1,3 @@
---[[
-
-=====================================================================
-==================== READ THIS BEFORE CONTINUING ====================
-=====================================================================
-========                                    .-----.          ========
-========         .----------------------.   | === |          ========
-========         |.-""""""""""""""""""-.|   |-----|          ========
-========         ||                    ||   | === |          ========
-========         ||   KICKSTART.NVIM   ||   |-----|          ========
-========         ||                    ||   | === |          ========
-========         ||                    ||   |-----|          ========
-========         ||:Tutor              ||   |:::::|          ========
-========         |'-..................-'|   |____o|          ========
-========         `"")----------------(""`   ___________      ========
-========        /::::::::::|  |::::::::::\  \ no mouse \     ========
-========       /:::========|  |==hjkl==:::\  \ required \    ========
-========      '""""""""""""'  '""""""""""""'  '""""""""""'   ========
-========                                                     ========
-=====================================================================
-=====================================================================
-
-What is Kickstart?
-
-  Kickstart.nvim is *not* a distribution.
-
-  Kickstart.nvim is a starting point for your own configuration.
-    The goal is that you can read every line of code, top-to-bottom, understand
-    what your configuration is doing, and modify it to suit your needs.
-
-    Once you've done that, you can start exploring, configuring and tinkering to
-    make Neovim your own! That might mean leaving Kickstart just the way it is for a while
-    or immediately breaking it into modular pieces. It's up to you!
-
-    If you don't know anything about Lua, I recommend taking some time to read through
-    a guide. One possible example which will only take 10-15 minutes:
-      - https://learnxinyminutes.com/docs/lua/
-
-    After understanding a bit more about Lua, you can use `:help lua-guide` as a
-    reference for how Neovim integrates Lua.
-    - :help lua-guide
-    - (or HTML version): https://neovim.io/doc/user/lua-guide.html
-
-Kickstart Guide:
-
-  TODO: The very first thing you should do is to run the command `:Tutor` in Neovim.
-
-    If you don't know what this means, type the following:
-      - <escape key>
-      - :
-      - Tutor
-      - <enter key>
-
-    (If you already know the Neovim basics, you can skip this step.)
-
-  Once you've completed that, you can continue working through **AND READING** the rest
-  of the kickstart init.lua.
-
-  Next, run AND READ `:help`.
-    This will open up a help window with some basic information
-    about reading, navigating and searching the builtin help documentation.
-
-    This should be the first place you go to look when you're stuck or confused
-    with something. It's one of my favorite Neovim features.
-
-    MOST IMPORTANTLY, we provide a keymap "<space>sh" to [s]earch the [h]elp documentation,
-    which is very useful when you're not exactly sure of what you're looking for.
-
-  I have left several `:help X` comments throughout the init.lua
-    These are hints about where to find more information about the relevant settings,
-    plugins or Neovim features used in Kickstart.
-
-   NOTE: Look for lines like this
-
-    Throughout the file. These are for you, the reader, to help you understand what is happening.
-    Feel free to delete them once you know what you're doing, but they should serve as a guide
-    for when you are first encountering a few different constructs in your Neovim config.
-
-If you experience any errors while trying to install kickstart, run `:checkhealth` for more info.
-
-I hope you enjoy your Neovim journey,
-- TJ
-
-P.S. You can delete this when you're done too. It's your config now! :)
---]]
-
 -- ============================================================
 -- SECTION 1: OPTIONS
 -- Core Neovim settings, leaders, options
@@ -427,23 +341,217 @@ do
   -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
   vim.pack.add { gh 'folke/tokyonight.nvim' }
   ---@diagnostic disable-next-line: missing-fields
-      require('tokyonight').setup {
-        styles = {
-          comments = { italic = false }, -- Disable italics in comments
-        },
-        -- Customize background color
-        on_colors = function(colors)
-          colors.bg = '#020203'
-          colors.bg_highlight = '#0A0A0C'
-        end,
+  require('tokyonight').setup {
+    -- Keep Tokyo Night Night's structure, but use my JAP custom palette.
+    -- as the source of truth for editor and syntax colors.
+    styles = {
+      comments = { italic = false },
+      functions = {},
+      keywords = {},
+      sidebars = 'dark',
+      floats = 'dark',
+    },
 
-        -- Customize highlight visual mode color
-        on_highlights = function(hl)
-          hl.Visual = {
-            bg = '#011368',
-          }
-        end,
+    on_colors = function(colors)
+      colors.bg = '#020203'
+      colors.bg_dark = '#020203'
+      colors.bg_float = '#0A0A0C'
+      colors.bg_popup = '#0A0A0C'
+      colors.bg_sidebar = '#020203'
+      colors.bg_statusline = '#0A0A0C'
+      colors.bg_highlight = '#0A0A0C'
+      colors.fg = '#B8C2CE'
+      colors.fg_dark = '#8D9199'
+      colors.fg_gutter = '#4E5157'
+      colors.border = '#28364F'
+      colors.blue = '#5BADEC'
+      colors.blue1 = '#4E7CFC'
+      colors.cyan = '#33D7B4'
+      colors.green = '#83CD71'
+      colors.orange = '#F6760A'
+      colors.magenta = '#CA72FC'
+      colors.magenta_cool = '#F81266'
+      colors.purple = '#7676F8'
+      colors.red = '#F77669'
+      colors.yellow = '#EEE85A'
+    end,
+
+    on_highlights = function(hl, colors)
+      local c = {
+        bg = '#020203',
+        surface = '#0A0A0C',
+        fg = '#B8C2CE',
+        muted = '#8D9199',
+        comment = "#808080",
+        gutter = '#4E5157',
+        orange = '#F6760A',
+        yellow = '#EEE85A',
+        green = '#83CD71',
+        purple = '#CA72FC',
+        teal = '#33D7B4',
+        blue = '#5BADEC',
+        blue_purple = '#7676F8',
+        magenta = '#CA72FC',
+        magenta_cool = '#F81266',
+        pink = '#EA0077',
+        type = "#9C9CE3",
+        selection = '#000F59',
+        border = '#28364F',
+        red = '#F77669',
       }
+
+      -- Editor surfaces and cursor/selection
+      hl.Normal = { fg = c.fg, bg = c.bg }
+      hl.NormalNC = { fg = c.fg, bg = c.bg }
+      hl.NormalFloat = { fg = c.fg, bg = c.surface }
+      hl.FloatBorder = { fg = c.border, bg = c.surface }
+      hl.SignColumn = { bg = c.bg }
+      hl.EndOfBuffer = { fg = c.bg }
+      hl.LineNr = { fg = c.gutter, bg = c.bg }
+      hl.CursorLineNr = { fg = c.muted, bg = c.surface, bold = true }
+      hl.CursorLine = { bg = c.surface }
+      hl.ColorColumn = { bg = c.surface }
+      hl.Visual = { bg = c.selection }
+      hl.Search = { fg = c.fg, bg = '#2C612A' }
+      hl.IncSearch = { fg = c.bg, bg = c.yellow, bold = true }
+      hl.CurSearch = { fg = c.bg, bg = c.yellow, bold = true }
+      hl.MatchParen = { fg = c.green, bg = '#326146', bold = true }
+      hl.Pmenu = { fg = c.fg, bg = c.surface }
+      hl.PmenuSel = { fg = c.fg, bg = c.selection }
+      hl.PmenuSbar = { bg = c.surface }
+      hl.PmenuThumb = { bg = c.muted }
+      hl.WinSeparator = { fg = c.border }
+      hl.VertSplit = { fg = c.border }
+      hl.Folded = { fg = c.muted, bg = c.surface }
+      hl.FoldColumn = { fg = c.gutter, bg = c.bg }
+      hl.Whitespace = { fg = '#43454A' }
+      hl.NonText = { fg = c.gutter }
+      hl.Directory = { fg = c.blue }
+      hl.Title = { fg = c.yellow, bold = true }
+
+      -- Core Vim syntax: preserve the JAP semantic color roles
+      hl.Comment = { fg = c.comment }
+      hl.Constant = { fg = c.purple }
+      hl.String = { fg = c.green }
+      hl.Character = { fg = c.green }
+      hl.Number = { fg = c.blue }
+      hl.Float = { fg = c.blue }
+      hl.Boolean = { fg = c.purple }
+      hl.Identifier = { fg = c.fg }
+      hl.Function = { fg = c.yellow }
+      hl.Statement = { fg = c.orange }
+      hl.Conditional = { fg = c.orange }
+      hl.Repeat = { fg = c.orange }
+      hl.Label = { fg = c.pink }
+      hl.Operator = { fg = c.fg }
+      hl.Keyword = { fg = c.orange }
+      hl.Exception = { fg = c.orange }
+      hl.PreProc = { fg = c.pink }
+      hl.Include = { fg = c.orange }
+      hl.Define = { fg = c.pink }
+      hl.Macro = { fg = c.blue_purple }
+      hl.Type = { fg = c.type }
+      hl.StorageClass = { fg = c.orange }
+      hl.Structure = { fg = c.green }
+      hl.Typedef = { fg = c.type }
+      hl.Special = { fg = c.magenta_cool }
+      hl.SpecialChar = { fg = c.blue }
+      hl.Tag = { fg = c.pink }
+      hl.Delimiter = { fg = c.muted }
+      hl.SpecialComment = { fg = c.comment }
+      hl.Underlined = { fg = c.blue, underline = true }
+      hl.Error = { fg = c.red }
+      hl.Todo = { fg = c.orange, bold = true }
+
+      -- Tree-sitter captures (new and legacy capture names)
+      local ts = {
+        ['@comment'] = { fg = c.comment },
+        ['@string'] = { fg = c.green },
+        ['@string.documentation'] = { fg = c.comment },
+        ['@character'] = { fg = c.green },
+        ['@number'] = { fg = c.blue },
+        ['@boolean'] = { fg = c.purple },
+        ['@constant'] = { fg = c.purple },
+        ['@constant.builtin'] = { fg = c.blue_purple },
+        ['@function'] = { fg = c.yellow },
+        ['@function.call'] = { fg = c.yellow },
+        ['@function.method'] = { fg = c.yellow },
+        ['@function.method.call'] = { fg = c.yellow },
+        ['@function.builtin'] = { fg = c.blue_purple },
+        ['@method'] = { fg = c.yellow },
+        ['@keyword'] = { fg = c.orange },
+        ['@keyword.function'] = { fg = c.orange },
+        ['@keyword.operator'] = { fg = c.orange },
+        ['@conditional'] = { fg = c.orange },
+        ['@repeat'] = { fg = c.orange },
+        ['@exception'] = { fg = c.orange },
+        ['@operator'] = { fg = c.fg },
+        ['@type'] = { fg = c.type },
+        ['@type.builtin'] = { fg = c.blue_purple },
+        ['@constructor'] = { fg = c.type },
+        ['@attribute'] = { fg = c.pink },
+        ['@attribute.builtin'] = { fg = c.pink },
+        ['@tag'] = { fg = c.pink },
+        ['@tag.attribute'] = { fg = c.teal },
+        ['@property'] = { fg = c.purple },
+        ['@field'] = { fg = c.purple },
+        ['@variable'] = { fg = c.fg },
+        ['@variable.builtin'] = { fg = c.magenta_cool },
+        ['@variable.parameter'] = { fg = c.teal },
+        ['@parameter'] = { fg = c.teal },
+        ['@namespace'] = { fg = c.blue_purple },
+        ['@module'] = { fg = c.blue_purple },
+        ['@label'] = { fg = c.pink },
+        ['@punctuation'] = { fg = c.muted },
+        ['@markup.heading'] = { fg = c.yellow, bold = true },
+        ['@markup.link'] = { fg = c.blue, underline = true },
+        ['@markup.raw'] = { fg = c.fg },
+        ['@markup.strong'] = { fg = c.fg, bold = true },
+        ['@markup.italic'] = { fg = c.fg, italic = true },
+      }
+      for group, opts in pairs(ts) do
+        hl[group] = opts
+      end
+
+      -- LSP semantic tokens
+      hl['@lsp.type.parameter'] = { fg = c.teal }
+      hl['@lsp.type.property'] = { fg = c.purple }
+      hl['@lsp.type.method'] = { fg = c.yellow }
+      hl['@lsp.type.function'] = { fg = c.yellow }
+      hl['@lsp.type.keyword'] = { fg = c.orange }
+      hl['@lsp.type.class'] = { fg = c.blue_purple }
+      hl['@lsp.type.enum'] = { fg = c.blue }
+      hl['@lsp.type.enumMember'] = { fg = c.blue }
+      hl['@lsp.type.namespace'] = { fg = c.blue_purple }
+      hl['@lsp.type.decorator'] = { fg = c.pink }
+
+      -- Diagnostics and diff signs
+      hl.DiagnosticError = { fg = c.red }
+      hl.DiagnosticWarn = { fg = '#FFCB6B' }
+      hl.DiagnosticInfo = { fg = c.blue }
+      hl.DiagnosticHint = { fg = c.teal }
+      hl.DiagnosticVirtualTextError = { fg = c.red, bg = c.surface }
+      hl.DiagnosticVirtualTextWarn = { fg = '#FFCB6B', bg = c.surface }
+      hl.DiagnosticVirtualTextInfo = { fg = c.blue, bg = c.surface }
+      hl.DiagnosticVirtualTextHint = { fg = c.teal, bg = c.surface }
+      hl.GitSignsAdd = { fg = c.green }
+      hl.GitSignsChange = { fg = c.blue }
+      hl.GitSignsDelete = { fg = c.red }
+
+      -- Telescope and mini.nvim interfaces
+      hl.TelescopeNormal = { fg = c.fg, bg = c.surface }
+      hl.TelescopeBorder = { fg = c.border, bg = c.surface }
+      hl.TelescopeSelection = { fg = c.fg, bg = c.selection }
+      hl.TelescopeMatching = { fg = c.yellow, bold = true }
+      hl.MiniStatuslineFilename = { fg = c.fg, bg = c.surface }
+      hl.MiniStatuslineDevinfo = { fg = c.teal, bg = c.surface }
+      hl.MiniStatuslineFileinfo = { fg = c.blue, bg = c.surface }
+      hl.MiniStatuslineModeNormal = { fg = c.bg, bg = c.blue }
+      hl.MiniStatuslineModeInsert = { fg = c.bg, bg = c.green }
+      hl.MiniStatuslineModeVisual = { fg = c.bg, bg = c.purple }
+      hl.MiniStatuslineModeCommand = { fg = c.bg, bg = c.orange }
+    end,
+  }
 
   -- Load the colorscheme here.
   -- Like many other themes, this one has different styles, and you could load
